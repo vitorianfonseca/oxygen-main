@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cyan-electric: #009FDF;
+    --cyan-dim: #007AB5;
+    --black-deep: #050505;
+    --surface-1: #0E0E0E;
+    --surface-2: #141414;
+    --surface-3: #1A1A1A;
+    --white: #F8F8F8;
+    --white-muted: rgba(248, 248, 248, 0.4);
+    --white-ghost: rgba(248, 248, 248, 0.06);
+    --accent-glow: rgba(0, 159, 223, 0.15);
+
+    /* RGB triplets for Tailwind opacity-modifier support */
+    --color-black-deep: 5 5 5;
+    --color-surface-1: 14 14 14;
+    --color-surface-2: 20 20 20;
+    --color-surface-3: 26 26 26;
+    --color-white: 248 248 248;
+
+    /* UI component tokens */
+    --nav-pill-bg: rgba(14, 14, 14, 0.85);
+    --nav-border: rgba(248, 248, 248, 0.06);
+    --overlay-bg: rgba(5, 5, 5, 0.98);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #050505;
+    color: #F8F8F8;
+    overflow-x: hidden;
+  }
+
+  /* Custom cursor only on pointer devices */
+  @media (hover: hover) {
+    body {
+      cursor: none;
+    }
+    a, button, [role="button"], input, textarea, select, label {
+      cursor: none;
+    }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0E0E0E;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 159, 223, 0.3);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 159, 223, 0.6);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(0, 159, 223, 0.25);
+    color: #F8F8F8;
+  }
+}
+
+/* @property and keyframes must be at top level — outside @layer */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to { --border-angle: 360deg; }
+}
+
+@layer components {
+  /* Service card corner accent */
+  .service-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cyan-electric);
+    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 2;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--cyan-electric);
+    transition: height 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) 0.1s;
+    z-index: 2;
+  }
+
+  .service-card:hover::before {
+    width: 48px;
+  }
+
+  .service-card:hover::after {
+    height: 48px;
+  }
+
+  /* Shimmer text */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--cyan-electric) 0%,
+      #80CFEF 30%,
+      #ffffff 50%,
+      #80CFEF 70%,
+      var(--cyan-electric) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Rotating gradient border for featured plan */
+  .featured-border {
+    position: relative;
+    background: linear-gradient(#141414, #141414) padding-box,
+      conic-gradient(
+        from var(--border-angle),
+        transparent 0deg,
+        transparent 60deg,
+        var(--cyan-electric) 120deg,
+        rgba(0, 159, 223, 0.4) 150deg,
+        transparent 180deg,
+        transparent 300deg,
+        var(--cyan-electric) 360deg
+      ) border-box;
+    border: 1px solid transparent;
+    animation: rotate-border 4s linear infinite;
+  }
+
+  /* Scan line effect */
+  .scan-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 159, 223, 0.08) 20%,
+      rgba(0, 159, 223, 0.15) 50%,
+      rgba(0, 159, 223, 0.08) 80%,
+      transparent 100%
+    );
+    animation: scan 6s linear infinite;
+  }
+
+  /* CTA button border trace */
+  .btn-trace svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-trace svg rect {
+    fill: none;
+    stroke: var(--cyan-electric);
+    stroke-width: 2;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .btn-trace:hover svg rect {
+    stroke-dashoffset: 0;
+  }
+
+  /* Text outline for decorative large text */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 159, 223, 0.08);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Manifesto clip-path reveal */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .clip-reveal.revealed {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@layer utilities {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  .text-cyan { color: var(--cyan-electric); }
+  .text-muted { color: var(--white-muted); }
+
+  .no-cursor { cursor: none !important; }
+
+  /* Marquee pause-on-hover */
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Hero vignette */
+  .hero-vignette {
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(5, 5, 5, 0.7) 100%);
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
