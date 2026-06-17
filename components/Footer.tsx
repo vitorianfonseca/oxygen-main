@@ -76,7 +76,7 @@ export default function Footer() {
         {/* Row 2 */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="font-inter text-[0.65rem] tracking-[0.08em] text-white/20">
-            © 2025 Oxygen Gym &amp; Fitness · Caldas da Rainha
+            © 2026 Oxygen Gym &amp; Fitness · Caldas da Rainha
           </p>
           <div className="flex items-center gap-4">
             <Link

@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import IdentityStrip from '@/components/IdentityStrip'
 import Manifesto from '@/components/Manifesto'
 import Services from '@/components/Services'
+import SkewContainer from '@/components/SkewContainer'
 import Classes from '@/components/Classes'
 import Trainers from '@/components/Trainers'
 import SocialMarquee from '@/components/SocialMarquee'
@@ -30,7 +31,9 @@ export default function Home() {
       <Divider />
       <Manifesto />
       <Divider />
-      <Services />
+      <SkewContainer>
+        <Services />
+      </SkewContainer>
       <Divider />
       <Classes />
       <Divider />

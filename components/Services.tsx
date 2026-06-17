@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Dumbbell, Heart, Users, User, Apple, ShowerHead } from 'lucide-react'
-import SkewContainer from '@/components/SkewContainer'
+
 
 const EASING = [0.25, 0.1, 0.25, 1] as const
 
@@ -26,7 +26,7 @@ const services = [
     num: '03',
     icon: Users,
     title: 'Aulas de Grupo',
-    description: 'Treina rodeado de energia e motivação. Body Pump, HIIT, Yoga e muito mais.',
+    description: 'Treina rodeado de energia e motivação. Cycling, Pilates, Zumba, GAP e muito mais.',
     span: 'col-span-1 md:col-span-1 lg:col-span-1',
   },
   {
@@ -36,19 +36,19 @@ const services = [
     description: 'Acompanhamento personalizado por profissionais certificados que conhecem o teu corpo e objetivos.',
     span: 'col-span-1 md:col-span-1 lg:col-span-2',
   },
+  /*   {
+      num: '05',
+      icon: Apple,
+      title: 'Nutrição Desportiva',
+      description: 'Planos nutricionais adaptados ao teu treino. Porque o resultado começa na mesa.',
+      span: 'col-span-1',
+    }, */
   {
     num: '05',
-    icon: Apple,
-    title: 'Nutrição Desportiva',
-    description: 'Planos nutricionais adaptados ao teu treino. Porque o resultado começa na mesa.',
-    span: 'col-span-1',
-  },
-  {
-    num: '06',
     icon: ShowerHead,
     title: 'Vestiários Premium',
     description: 'Balneários amplos, modernos e equipados. A tua experiência não termina no treino.',
-    span: 'col-span-1 md:col-span-2 lg:col-span-1',
+    span: 'col-span-1',
   },
 ]
 
@@ -154,7 +154,6 @@ export default function Services() {
       ref={sectionRef}
       className="relative w-full bg-black-deep py-12 md:py-16 overflow-hidden"
     >
-      <SkewContainer>
       <div className="max-w-7xl mx-auto px-8 md:px-16">
 
         {/* Title */}
@@ -191,26 +190,19 @@ export default function Services() {
 
         {/* Cards grid — desktop: creative stagger; mobile: scroll snap */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Row 1: 2 wide cards (col-span-2 each) */}
-          {[0, 1].map((i) => (
-            <div key={i} className="col-span-2">
-              <ServiceCard service={services[i]} index={i} />
+          {services.map((service, i) => (
+            <div
+              key={i}
+              className={
+                i < 2 ? "col-span-2" : // Row 1: items 0, 1
+                  i === 3 ? "col-span-2" : // Row 2 middle: item 3
+                    i === 5 ? "col-span-4" : // Row 3: item 5 (se existir)
+                      "col-span-1" // Restantes
+              }
+            >
+              <ServiceCard service={service} index={i} />
             </div>
           ))}
-          {/* Row 2: narrow + wide + narrow */}
-          <div className="col-span-1">
-            <ServiceCard service={services[2]} index={2} />
-          </div>
-          <div className="col-span-2">
-            <ServiceCard service={services[3]} index={3} />
-          </div>
-          <div className="col-span-1">
-            <ServiceCard service={services[4]} index={4} />
-          </div>
-          {/* Row 3: full width */}
-          <div className="col-span-4">
-            <ServiceCard service={services[5]} index={5} />
-          </div>
         </div>
 
         {/* Mobile: horizontal scroll carousel */}
@@ -243,7 +235,6 @@ export default function Services() {
           </div>
         </div>
       </div>
-      </SkewContainer>
     </section>
   )
 }
