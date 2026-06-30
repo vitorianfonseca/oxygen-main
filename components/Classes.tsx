@@ -199,7 +199,8 @@ export default function Classes() {
                   <div className="font-space font-bold text-sm text-white mb-0.5">{cls.name}</div>
                   <div className="font-inter text-[0.62rem] tracking-[0.1em] uppercase text-white/20">{cls.duration}</div>
                 </div>
-                <p className="font-inter text-[0.67rem] text-white/25 leading-relaxed hidden lg:block">{cls.desc}</p>
+                {/* Removido o 'hidden lg:block' daqui 👇 */}
+                <p className="font-inter text-[0.67rem] text-white/25 leading-relaxed">{cls.desc}</p>
               </motion.div>
             ))}
           </div>

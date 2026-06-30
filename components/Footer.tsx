@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Instagram, MessageCircle } from 'lucide-react'
+import { Instagram, MessageCircle, Facebook } from 'lucide-react' // Adicionado o import do Facebook
 import Link from 'next/link'
-import { INSTAGRAM_URL, WHATSAPP_MSG } from '@/lib/constants'
+import { INSTAGRAM_URL, WHATSAPP_MSG, FACEBOOK_URL } from '@/lib/constants' // Adicionado o FACEBOOK_URL
 
 const navLinks = [
   { label: 'Serviços', href: '#servicos' },
@@ -57,6 +57,19 @@ export default function Footer() {
             >
               <Instagram size={14} />
             </a>
+
+            {/* Novo Botão do Facebook */}
+            <a
+              href={FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full border border-white/[0.07] flex items-center justify-center text-white/40 hover:text-[#009FDF] hover:border-[#009FDF]/30 transition-all duration-300"
+              data-hover="true"
+              aria-label="Facebook"
+            >
+              <Facebook size={14} />
+            </a>
+
             <a
               href={WHATSAPP_MSG()}
               target="_blank"

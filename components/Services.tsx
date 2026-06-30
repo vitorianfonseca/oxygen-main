@@ -13,28 +13,28 @@ const services = [
     icon: Dumbbell,
     title: 'Musculação',
     description: 'Equipamento de ponta para trabalhar cada grupo muscular com precisão. Evolui ao teu ritmo.',
-    span: 'col-span-1',
+    span: 'col-span-1 md:col-span-2 lg:col-span-6', // Ocupa 50% em desktop
   },
   {
     num: '02',
     icon: Heart,
     title: 'Cardio',
     description: 'Máquinas cardiovasculares de última geração. Corrida, bicicleta, elíptica — o teu coração agradece.',
-    span: 'col-span-1',
+    span: 'col-span-1 md:col-span-2 lg:col-span-6', // Ocupa 50% em desktop
   },
   {
     num: '03',
     icon: Users,
     title: 'Aulas de Grupo',
     description: 'Treina rodeado de energia e motivação. Cycling, Pilates, Zumba, GAP e muito mais.',
-    span: 'col-span-1 md:col-span-1 lg:col-span-1',
+    span: 'col-span-1 md:col-span-2 lg:col-span-5', // Ocupa ~40% em desktop (cartão mais pequeno)
   },
   {
     num: '04',
     icon: User,
     title: 'Personal Trainer',
     description: 'Acompanhamento personalizado por profissionais certificados que conhecem o teu corpo e objetivos.',
-    span: 'col-span-1 md:col-span-1 lg:col-span-2',
+    span: 'col-span-1 md:col-span-2 lg:col-span-7', // Ocupa ~60% em desktop (preenche o resto da linha)
   },
   /*   {
       num: '05',
@@ -43,13 +43,13 @@ const services = [
       description: 'Planos nutricionais adaptados ao teu treino. Porque o resultado começa na mesa.',
       span: 'col-span-1',
     }, */
-  {
-    num: '05',
-    icon: ShowerHead,
-    title: 'Vestiários Premium',
-    description: 'Balneários amplos, modernos e equipados. A tua experiência não termina no treino.',
-    span: 'col-span-1',
-  },
+  /*   {
+      num: '05',
+      icon: ShowerHead,
+      title: 'Vestiários Premium',
+      description: 'Balneários amplos, modernos e equipados. A tua experiência não termina no treino.',
+      span: 'col-span-1',
+    }, */
 ]
 
 function ServiceCard({
@@ -188,20 +188,10 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Cards grid — desktop: creative stagger; mobile: scroll snap */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Cards grid — desktop: Bento Box adaptativo */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
           {services.map((service, i) => (
-            <div
-              key={i}
-              className={
-                i < 2 ? "col-span-2" : // Row 1: items 0, 1
-                  i === 3 ? "col-span-2" : // Row 2 middle: item 3
-                    i === 5 ? "col-span-4" : // Row 3: item 5 (se existir)
-                      "col-span-1" // Restantes
-              }
-            >
-              <ServiceCard service={service} index={i} />
-            </div>
+            <ServiceCard key={service.num} service={service} index={i} />
           ))}
         </div>
 

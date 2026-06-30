@@ -2,7 +2,8 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+// Importamos os ícones novos
+import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react'
 
 const EASING = [0.25, 0.1, 0.25, 1] as const
 
@@ -46,7 +47,7 @@ export default function ClosingCTA() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10 w-full max-w-5xl mx-auto">
           {/* Label */}
           <motion.p
             className="font-inter text-label uppercase tracking-[0.4em] text-white/30 mb-8"
@@ -111,6 +112,83 @@ export default function ClosingCTA() {
               Sem fidelização · Sem compromisso · Só resultados
             </p>
           </motion.div>
+
+          {/* ----- NOVA SECÇÃO DE INFO: Contactos e Horários ----- */}
+          <motion.div
+            className="mt-24 pt-12 border-t border-white/[0.06] grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 text-left"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.85, duration: 0.8, ease: EASING }}
+          >
+            {/* Contactos & Localização */}
+            <div className="space-y-6">
+              <h3 className="font-space font-bold text-sm text-white tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
+                <MapPin size={18} className="text-[#009FDF]" />
+                Onde Estamos
+              </h3>
+
+              <div className="space-y-5">
+                <a
+                  href="https://maps.google.com/?q=R.+Henrique+da+Mota+10,+2500-074+Caldas+da+Rainha"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 font-inter text-sm text-white/50 hover:text-white transition-colors duration-300"
+                >
+                  <MapPin size={18} className="text-white/20 group-hover:text-[#009FDF] shrink-0 mt-0.5 transition-colors duration-300" />
+                  <span>R. Henrique da Mota 10,<br />2500-074 Caldas da Rainha</span>
+                </a>
+
+                <div className="flex items-start gap-4 font-inter text-sm text-white/50">
+                  <Phone size={18} className="text-white/20 shrink-0 mt-0.5" />
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                    <a href="tel:+351262407497" className="hover:text-white transition-colors duration-300">262 407 497</a>
+                    <span className="hidden sm:inline text-white/20">•</span>
+                    <a href="tel:+351935197656" className="hover:text-white transition-colors duration-300">935 197 656</a>
+                  </div>
+                </div>
+
+                <a
+                  href="mailto:oxygen.gymfitness@gmail.com"
+                  className="group flex items-center gap-4 font-inter text-sm text-white/50 hover:text-white transition-colors duration-300"
+                >
+                  <Mail size={18} className="text-white/20 group-hover:text-[#009FDF] shrink-0 transition-colors duration-300" />
+                  <span>oxygen.gymfitness@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Horário */}
+            <div className="space-y-6">
+              <h3 className="font-space font-bold text-sm text-white tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
+                <Clock size={18} className="text-[#009FDF]" />
+                Horário
+              </h3>
+
+              <ul className="space-y-3 w-full max-w-sm">
+                <li className="flex justify-between items-center border-b border-white/[0.04] pb-3">
+                  <span className="font-inter text-sm text-white/50">Segunda – Sexta</span>
+                  <span className="font-space font-medium text-sm text-white">07:00 – 22:30</span>
+                </li>
+                <li className="flex justify-between items-center border-b border-white/[0.04] pb-3">
+                  <span className="font-inter text-sm text-white/50">Sábado</span>
+                  <div className="text-right">
+                    <span className="font-space font-medium text-sm text-white block">09:30 – 13:00</span>
+                    <span className="font-space font-medium text-sm text-white block">15:30 – 19:00</span>
+                  </div>
+                </li>
+                <li className="flex justify-between items-center pt-1">
+                  <span className="font-inter text-sm text-white/50">Domingo</span>
+                  <span className="font-space font-bold text-sm text-[#009FDF] tracking-wide uppercase text-[0.75rem]">Encerrado</span>
+                </li>
+                <li className="flex justify-between items-center pt-1">
+                  <span className="font-inter text-sm text-white/50">Feriados</span>
+                  <span className="font-space font-medium text-sm text-white block">09:30 – 13:00</span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+          {/* ----- FIM DA SECÇÃO ----- */}
+
         </div>
       </div>
 

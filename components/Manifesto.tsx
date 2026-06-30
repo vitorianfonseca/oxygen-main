@@ -11,8 +11,8 @@ const manifestoLines = [
 ]
 
 const stats = [
-  { value: 988, suffix: '', label: 'publicações', prefix: '' },
-  { value: 2595, suffix: '', label: 'seguidores', prefix: '' },
+  { value: 988, suffix: '+', label: 'publicações', prefix: '' },
+  { value: 8000, suffix: '+', label: 'seguidores', prefix: '' },
   { value: 100, suffix: '%', label: 'comprometidos', prefix: '' },
 ]
 
